@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- node-module中的react/umd/ -->
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/babel-standalone/babel.min.js"></script>
+</head>
+<body>
+    <!-- 创建根节点:一个页面中需要一个根节点，这个节点下的内容被react所管理 -->
+    <div id='demoReact'>
+
+    </div>
+    <!-- 需要制定type为text/babel否则在使用的时候会报错 -->
+    <script type="text/babel">
+        // JSX ，javascript 与 xml 结合，js的扩展语法
+        /*
+        执行效率更快，类型安全，编译过程中及时发现错误  
+        在使用jsx编写模板会更加简单快速
+        jsx中HTML标签必须安装w3c的规范书写否则编译不通过
+        */
+        let Dom = <h1>你好</h1>
+        let Jiedian = document.getElementById('demoReact')
+        ReactDOM.render(Dom,Jiedian)
+    </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/babel-standalone/babel.min.js"></script></head>
+
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        /* 
+        条件渲染：根据状态的变化只渲染其中的一部分
+        1.if语句 在jsx中是不予许有if的
+
+        */
+        let el = document.getElementById('root');
+        
+        class Com extends React.Component{
+            constructor(props){
+                super(props)
+                this.state={
+                    a:true
+                }
+            }
+            change=()=>{
+                this.setState({
+                    a:!this.state.a
+                })
+            }
+            render(){
+                let text;
+                if(this.state.a){
+                    text='李香兰'
+                }else{
+                    text='定风波'
+                }
+                return(
+                    <div>
+                        <p>{text}</p>
+                        <button onClick={this.change}>点击修改</button>
+                        {/*三元运算符*/}
+                        <p>{this.state.a?'李香兰':"定风波"}</p>
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(<Com/>,el)
+    </script>
+</body>
+</html>

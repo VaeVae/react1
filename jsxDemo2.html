@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/babel-standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id='root'></div>
+    <script type="text/babel">
+    /*
+    jsx中使用表达式放在 {} 中
+    */
+        // 表达式 { 表达式 }
+        let text = '李香兰';
+        // 计算
+        let num = 3 ;
+        // 函数
+        function sing(obj){
+            return obj.singer+'：'+obj.song
+        }
+        // 函数参数
+        let singer = {singer:'张学友',song:'李香兰'};
+        let Com = (
+            <div>
+                <p>{text}</p>
+                <p>张学友</p>
+                {/* 计算 */}
+                <p>{ num+4 }</p>
+                {/* 函数 */}
+                <p>{ sing(singer) }</p>
+            </div>
+        )
+        let el = document.getElementById('root');
+        ReactDOM.render(Com,el)
+    </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/babel-standalone/babel.min.js"></script>
+    <!-- 这里有一个问题：如果引入的是 min.js 验证不会触发只有引入不压缩的js才能触发验证-->
+    <!-- <script src="node_modules/prop-types/prop-types.min.js"></script> -->
+    <script src="node_modules/prop-types/prop-types.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+    /*
+    无状态组件的props验证与默认值
+    默认值:defaultProps属性
+    props验证：验证传递进来的数据是否符合我们期望的类型和要求（上线模式请取消props验证）
+    1.应用prop-types 库 npm install --save prop-types
+    */
+        function Com1(props){
+            return (
+                <div>
+                    <p>我是无状态组件</p>
+                    <p>{props.name}-{props.song}</p>
+                </div>
+            )
+        }
+        Com1.defaultProps={
+            name:'张学友',
+            song:'李香兰'
+        }
+        // 在react版本为15x的情况下就不能直接使用defaultProps
+        /* 需要使用下面这种方式
+          function Com1(props){
+              props.name=props.name||'张学友'
+              props.song=props.song||'李香兰'
+            return (
+                <div>
+                    <p>我是无状态组件</p>
+                    <p>{props.name}-{props.song}</p>
+                </div>
+            )
+        }
+        */
+        Com1.propTypes={
+            name:PropTypes.string.isRequired,
+            song:PropTypes.string
+        }
+        let Com = <Com1 name='刘德华' song='冰雨'/>
+        let el = document.getElementById('root');
+        ReactDOM.render(Com,el);
+    </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/babel-standalone/babel.min.js"></script>
+
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+    /*
+    props: react中组件对外的接口，可以通过props从组件外部向组件内部进行数据传递
+            也可以完成父组件向子组件数据的传递
+    注意：无论是类组件还是函数/无状态组件都不能修改自身的props（react单向数据流）
+    */
+        // 无状态组件
+        function Com1(props){
+            return(
+                <div>
+                    <p>我是无状态组件</p>
+                    <p>{props.text}</p>
+                    <p>{props.info}</p>
+                    <p>{props.name}-{props.song}</p>
+                </div>
+            )
+        }
+        // 传变量
+        let info ='我是变量通过props传递的一个信息'
+        // 传对象
+        let obj={
+            name:'刘德华',
+            song:'冰雨'
+        }
+        // let Com = <Com1 {...obj} info={info} text='我是props传递到组件中的值'/>
+        // 类组件
+        class Com2 extends React.Component{
+            render(){
+                return(
+                    <div>
+                        <p>我是类组件</p>
+                        <p>{this.props.name}-{this.props.song}</p>
+                        <p>{this.props.text}</p>
+                        <p>{this.props.info}</p>
+                    </div>
+                )
+            }
+        }
+        let Com = <Com2 text='直接传递的信息' info={info} {...obj} />
+        let el = document.getElementById('root');
+        ReactDOM.render(Com,el);
+    </script>
+</body>
+</html>

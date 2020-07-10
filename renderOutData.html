@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/babel-standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+    /*
+        外部数据渲染
+        通过点击了'歌手列表'展示所有数据信息
+    */
+        let el = document.getElementById('root');
+        let contrl = false ; //用来控制列表的展示与隐藏
+        // 模拟数据
+        let dataResource = [
+            { name:'张学友',song:'李香兰' },
+            { name:'刘德华',song:'冰雨' },
+            { name:'李克勤',song:'红日' },
+            { name:'陈奕迅',song:'不要说话' }
+        ]
+        let Son=(props)=>{
+            return (
+                <div style={{display:contrl?'block':'none'}}>
+                    {
+                        props.data.map((item,index)=>{
+                            return (
+                                <p key={index}>{item.name}-{item.song}</p>
+                            )
+                        })
+                    }
+                    
+                </div>
+            )
+        }
+        let Father=()=>{
+            return (
+                <div>
+                // 数据改变后需要重新渲染
+                    <p onClick={()=>{contrl=!contrl;render()}}>歌手列表</p>
+                    <Son data={dataResource}/>
+                </div>
+            )
+        }
+        function render(){
+            ReactDOM.render(<Father/>,el)
+        }
+        render()
+    </script>
+</body>
+</html>

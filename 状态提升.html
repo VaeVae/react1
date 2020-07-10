@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/babel-standalone/babel.min.js"></script></head>
+
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+    /*
+        状态提升：多个组件需要反映相同的变化数据，数据提升到最近的一个父组件里面，父组件中操作之后通过props在传回去
+        多个子组件需要利用对方状态的情况下，需要使用状态提升
+    */
+        let el = document.getElementById("root");
+
+        class Son extends React.Component{
+            constructor(props){
+                super(props);
+
+            }
+            render(){
+                return(
+                    <div>
+                        <p>-------------------------------------</p>
+                        <p>son</p>
+                        <p>singer：{this.props.singer}</p>
+                    </div>
+                )
+            }
+        }
+        class LittleSon extends React.Component{
+            constructor(props){
+                super(props);
+
+            }
+            render(){
+                return(
+                    <div>
+                        <p>-------------------------------------</p>
+                        <p>little son</p>
+                        <p>singer：{this.props.singer}</p>
+                    </div>
+                )
+            }
+        }
+        class Daughter extends React.Component{
+            constructor(props){
+                super(props);
+
+            }
+            render(){
+                return(
+                    <div>
+                        <p>-------------------------------------</p>
+                        <p>daughter</p>
+                        <p>singer：{this.props.singer}</p>
+                    </div>
+                )
+            }
+        }
+        
+        class Father extends React.Component{
+            constructor(props){
+                super(props);
+                this.state={
+                    singer:'张学友'
+                }
+            }
+            changeFather=()=>{
+                this.setState({
+                    singer:'刘德华'
+                })
+            }
+            render(){
+                return(
+                    <div>
+                        <p>Father</p>
+                        <button onClick={this.changeFather}>点击修改父组件数据</button>
+                        <p>父组件中使用子组件</p>
+                        <Son {...this.state}/>
+                        <Daughter {...this.state}/>
+                        <LittleSon {...this.state}/>
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(<Father/>,el)
+
+    </script>
+</body>
+</html>

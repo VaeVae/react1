@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/babel-standalone/babel.min.js"></script>
+
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+    /*
+    组件：高耦合低内聚（逻辑紧密的内容放在一个组件中，把不同的组件的依赖关系弱化，每个组件尽可能独立）
+    1.构建方式
+    2.组件的属性
+    3.生命周期
+    react 组件分为：属性props 、状态state 、生命周期
+              通过组件可以把页面上的切分成独立的高复用的部件
+    组件与组件化：
+        组件：实现页面布局功能的代码集合，简化页面的复杂程度提高运行效率
+        组件化：当前程序都是使用组件完成的，就是一个组件化的应用
+    
+    组件的创建：
+        1.函数组件/无状态组件
+        2.类组件
+    */
+    // 1-创建无状态组件 (没有实例) , 组件是自定义标签 ,单双标签都可
+        function Com1(){
+            return(
+                <div>
+                    这是一个自定义组件
+                </div>
+            )
+        }
+    // 1-调用组件,相当于自定义一个标签Com1
+        let Com = <Com1/>
+        let el = document.getElementById('root');
+        ReactDOM.render(Com,el);
+    </script>
+</body>
+</html>

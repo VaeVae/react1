@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/babel-standalone/babel.min.js"></script></head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+    /*
+        state:状态
+        state与props的区别
+        props：组件对外的接口
+        state：组件对内的接口
+        组件内可以引用其他的组件，组件之间形成了树状的接口，
+        下层组件需要使用上层组件的数据，上层组件向下层组件传值，下层组件使用props来接收的方式来进行传递
+        所以props是组件对外的接口
+
+        组件除了使用上层组件的数据之外，它本身也需要管理数据，对内管理数据的属性是state
+        状态等同于页面中的数据，状态/数据改变了，页面对应的数据绑定内容就会被react自动改变
+        主要区别：
+        state是可变的
+        props对于当前页面的组件来说，是只读的，如果需要修改，需要修改当前传递数据过来的父组件的内容
+
+
+        声明式渲染 改变操作不需要管，只需要声明好数据，react会自动对数据进行响应的改变
+
+        使用状态不能使用无状态组件
+
+    */
+        let el = document.getElementById('root');
+
+        class Com extends React.Component{
+            // constructor在实例创建的时候都会调用，如果写了constructor就得在里面写上super()指向父类的构造方法
+            // 如果想要在constructor中使用props，就将当前组件props传到constructor中并且super中也需要写上props
+            constructor(props){
+                super(props)
+                // 定义state
+                this.state={
+                    name:'张学友',
+                    song:'李香兰'
+                }
+            }
+            render(){
+                return(
+                    <div>
+                    {/*使用state中的数据*/}
+                        <p>{this.state.name}-{this.state.song}</p>
+                    {/*修改state中的数据不能直接修改，只能通过this.setState({key:newValue})来修改，它是异步的，*/}
+                    {/*修改了值会自动的render数据渲染*/} 
+                        <button onClick={()=>{this.setState({name:'刘德华',song:"冰雨"})}}>点击修改state中的数据</button>
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(<Com/>,el)
+    </script>
+</body>
+</html>

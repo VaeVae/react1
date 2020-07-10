@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/babel-standalone/babel.min.js"></script>
+
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+    // 1.函数组件
+        /*
+        父子组件：
+        */
+        function Father(){
+            return (
+                <div>
+                    我是你爸爸
+                    <Son/>
+                    <LittleSon/>
+                </div>
+            )
+        }
+        function Son(){
+            return (
+                <div>我是儿子</div>
+            )
+        }
+        function LittleSon(){
+            return (
+                <div>我是小儿子</div>
+            )
+        }
+        let el = document.getElementById('root');
+        ReactDOM.render(<Father/>,el);
+    </script>
+</body>
+</html>

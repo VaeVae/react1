@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/babel-standalone/babel.min.js"></script>
+
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+    /*
+    对象的取值方式
+        let obj = { name:'张学友' , song:"李香兰" }；
+        obj.name => 对象.属性名称
+        obj['age'] => 对象['属性名称']
+        两种方式都可以，但是最好用后者，当属性名是一个变量的时候只能使用第二种方式渠取到属性值
+        Object.keys(obj) => 返回一个数组类型的值，所得到的是 属性名/键名的列表
+        Object.value(obj) => 返回数组类型，得到 属性值/键值的列表
+    */
+        let obj = { name:'张学友' , song:"李香兰" };
+        let Com = (
+            <div>
+                {
+                    Object.keys(obj).map((item,index)=>{
+                        return <p key={ index }>{ item }--{ obj[item] }</p>
+                    })
+                }
+            </div>
+        );
+        let el = document.getElementById('root');
+        ReactDOM.render(Com,el)
+    </script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../node_modules/react/umd/react.development.js"></script>
+    <script src="../node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="../node_modules/babel-standalone/babel.min.js"></script>
+    <style>
+        .myA{
+            font-size: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel" >
+        let el = document.getElementById('root')
+        // 三元运算符
+        let price =(Math.random())*600;
+        let Com = (
+            <div>
+                价格：{ price } {price>300?'大于300':'不大于300'}
+            </div>
+        )
+        // ReactDOM.render(Com,el)
+        // 列表渲染
+        // 1.组件列表
+        let arrCom = [
+            <p key='1'>陈奕迅</p>,
+            <p key='2'>陈小春</p>,
+            <p key='3'>陈柏宇</p>,
+            <p key='4'>陈百强</p>
+        ]
+        let Com1=(<div>{arrCom}</div>)
+        // ReactDOM.render(Com1,el)
+        // 属性渲染
+        let text = '百度';
+        let url='http://www.baidu.com';
+        // 样式是一个对象
+        let style={
+            color:'red',
+            backgroundColor:'pink'
+        }
+        // jsx中不能用class来传递类名，因为是关键字，需要类名className
+        let Com2=<a className='myA' style={style} href={url}>{text}</a>
+        // ReactDOM.render(Com2,el)
+
+
+        // 列表渲染
+        // 2.数据数组，遍历可用 map , for , for in , foreach ...
+        // let arr = ['张学友','黎明','郭富城','刘德华'];
+        // let i = -1 ;
+        // let Com3 = (
+        //     <div>
+        //         {
+        //             arr.map((item,index)=>{
+        //                 // 循环数据生成需要 key 唯一的标识 , 
+        //                 // return 后面不能直接换行 点击事件后面要箭头函数(否则会直接进行触发)
+        //                 // 通过修改 i 的值来控制点击的当前的 p 标签的颜色，但是 i 被修改了样式却没有被渲染出来，是因为每次修改了 i 的值之后都需要重新执行 render() 方法
+        //                 return (<p style={{color:i==index?'red':''}} onClick={()=>{i=index;console.log(i,index,'index')}} key={index}>{ item }</p>)
+        //             })
+        //         }
+        //     </div>
+        // )
+        // ReactDOM.render(Com3,el)
+        
+        // 定义一个方法
+        let arr = ['张学友','黎明','郭富城','刘德华'];
+        let i = -1 ;
+        function fun2(){
+            let Com3 = (
+                <div>
+                    {
+                        arr.map((item,index)=>{
+                            // 每次修改数据之后都需要渲染一次，render() 
+                            return (<p style={{color:i==index?'red':''}} onClick={()=>{i=index;fun1();console.log(i,index,'index')}} key={index}>{ item }</p>)
+                        })
+                    }
+                </div>
+            )
+            // 将得到的组件返回
+            return Com3
+        }
+        // 所以 定义一个方法 ，来调用render()方法
+        function fun1(){
+            ReactDOM.render(fun2(),el)
+        }
+        // 初始第一次出现列表
+        fun1();
+    </script>
+
+</body>
+
+</html>

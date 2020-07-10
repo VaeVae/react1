@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/babel-standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id='demoReact'>
+
+    </div>
+    <script type="text/babel">
+    /*
+    jsx中需要注释：
+    */
+    // 注释的使用
+        let Dom = <h1>你好 {/*注释的内容只能是{}中包裹反斜杠星号的内容*/}</h1>
+    // 多行内容的使用，必须要有一个进行包裹也就是说被渲染的组件只能有一个最外层元素
+        let Dom2 =<div>
+            多行内容
+            <p>第一行的内容</p>
+            <p>第二行的内容</p>
+        </div>
+        let Jiedian = document.getElementById('demoReact')
+        // ReactDOM.render(Dom,Jiedian)
+        ReactDOM.render(Dom2,Jiedian)
+    </script>
+</body>
+</html>

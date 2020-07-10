@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/babel-standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+    /*
+    this.setState()异步的：
+
+    */
+        let el = document.getElementById('root');
+        class Com extends React.Component{
+            constructor(props){
+                super(props);
+                this.state={
+                    name:'张学友',
+                    song:'李香兰',
+                    htmlStr:'<p>这是字符串标签的内容</p>'
+                }
+            }
+            // 这里的方法是箭头函数形式
+            changeState=()=>{
+                let arr = ['慢慢','烦恼歌','定风波']
+                let index = Math.round(Math.random()*2)
+                // this.setState({
+                //     song:arr[index]
+                // })
+                // // 因为setState是异步的。所以这里直接拿到的值是修改前的值
+                // console.log(this.state.song,'prevValue')
+
+                // 所以当需要马上拿到修改后的值：thissetState({},function(){})
+                // 第二个参数回调函数中可以拿到
+                this.setState({
+                    song:arr[index]
+                }, ()=>{
+                    // 此时拿到的值才是真正修改之后的值
+                    console.log(this.state.song,'Real after Change Value')
+                })
+            }
+            render(){
+                return(
+                    <div>
+                        <p>{this.state.name}-{this.state.song}</p>
+                        {/*绑定方法的时候不能写方法的调用，只能是方法否则会自动触发而不是点击触发*/}
+                        <button onClick={this.changeState}>点击修改state</button>
+                        {/*使用  dangerouslySetInnerHTML 属性显示字符串标签的内容  dangerouslySetInnerHTML={{__html:需要插入的字符串}}*/}
+                        <div dangerouslySetInnerHTML={{__html:this.state.htmlStr}}></div>
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(<Com/>,el)
+    </script>
+</body>
+</html>

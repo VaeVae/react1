@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/babel-standalone/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        /*
+        ***** 不要过度使用 refs对逻辑进行处理，需要优先考虑state ***
+
+        转发 refs: react提供了一个 ref的属性，不能在无状态组件中进行使用，因为无状态组件没有实例
+                   它是当前组件的真正实例的引用，会返回当前绑定当前属性的元素
+                   标识组件内部的元素，方便查找
+        3种使用方式：
+            1.字符串方式
+            2.回调函数方式（推荐使用）,
+                在DOM节点上或者在组件上挂载函数，函数的形参是Dom节点 与字符串的获取形式一样获取值得引用
+
+            3.React.createRef() react 16.3新提供的方式
+                把值赋给一个变量 通过ref挂载在节点或组件上，使用ref 的current属性获取到该元素
+        */
+        let el = document.getElementById('root');
+
+        class Com extends React.Component {
+            constructor(props){
+                super(props);
+                // 3.使用React.createRef()来创建一个变量，将变量绑定在对应的元素上
+                this.Input3 = React.createRef();
+            }
+            // 获取输入框中的值
+            getInput = () => {
+                // 1.字符串形式直接 this.refs.name 获取元素
+                // console.log(this.refs.Input.value)
+                // 2.回调函数形式 ，使用自定义的参数名来获取当前元素
+                // console.log(this.input2.value,)
+                // 3.React.createRef()，使用 变量.current 获取该元素
+                console.log(this.Input3.current.value,'11111')
+            }
+            render() {
+                return (
+                    <div>
+                        {/* 1.字符串形式 */}
+                        <input type="text" ref='Input' placeholder='请输入内容' />
+                        {/* 2.回调函数形式 , 默认会有一个参数，该参数就是当前的元素  自定义一个参数名将当前元素赋给它，通过这个参数名就可以获取到当前的元素*/}
+                        <input type="text" ref={(input)=>{this.input2=input}} placeholder='请输入内容'/>
+                        {/* 3.React.createRef() 绑定定义的变量名*/}
+                        <input type="text" ref={this.Input3} placeholder='请输入'/>
+                        <button onClick={this.getInput}>点击</button>
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(<Com />, el)
+    </script>
+</body>
+
+</html>
